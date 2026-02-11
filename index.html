@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine's Love Game ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ff4d6d, #ff9aa2);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .screen {
+      display: none;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 2rem 2.5rem;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .screen.active { display: block; }
+    h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    p { font-size: 1.05rem; line-height: 1.6; }
+    button {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      background: #fff;
+      color: #ff4d6d;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .choices button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    .heart {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: rise 6s linear infinite;
+      opacity: 0.8;
+    }
+    @keyframes rise {
+      from { transform: translateY(0) scale(0.8); opacity: 1; }
+      to { transform: translateY(-100vh) scale(1.4); opacity: 0; }
+    }
+  </style>
+</head>
+<body>  <!-- Start Screen -->  <div id="start" class="screen active">
+    <h1>Valentine's Love Game ❤️</h1>
+    <p>Hey <strong>[Her Name]</strong> 💕<br>Ready to play a little love game?</p>
+    <button onclick="goTo('q1')">Start the Game 🎮</button>
+  </div>  <!-- Question 1 -->  <div id="q1" class="screen">
+    <h1>Question 1</h1>
+    <p>When I think about you, I feel…</p>
+    <div class="choices">
+      <button onclick="next('q2')">Happy 😊</button>
+      <button onclick="next('q2')">Loved ❤️</button>
+      <button onclick="next('q2')">Lucky 🍀</button>
+    </div>
+  </div>  <!-- Question 2 -->  <div id="q2" class="screen">
+    <h1>Question 2</h1>
+    <p>My favorite thing about you is…</p>
+    <div class="choices">
+      <button onclick="next('q3')">Your smile 😍</button>
+      <button onclick="next('q3')">Your heart 💖</button>
+      <button onclick="next('q3')">Everything about you 🥰</button>
+    </div>
+  </div>  <!-- Question 3 -->  <div id="q3" class="screen">
+    <h1>Final Question</h1>
+    <p>Will you be my Valentine forever?</p>
+    <div class="choices">
+      <button onclick="next('end')">Yes 💘</button>
+      <button onclick="next('end')">Of course 😘</button>
+    </div>
+  </div>  <!-- End Screen -->  <div id="end" class="screen">
+    <h1>I Love You ❤️</h1>
+    <p>
+      You just won my heart all over again 😌💞<br><br>
+      Happy Valentine's Day, my love.
+    </p>
+    <p>Forever yours,<br><strong>[Your Name]</strong></p>
+  </div>  <script>
+    function goTo(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function next(id) { goTo(id); }
+
+    // Floating hearts
+    const emojis = ['❤️','💖','💘','💝','💕'];
+    setInterval(() => {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.bottom = '-20px';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 6000);
+    }, 500);
+  </script></body>
+</html>
